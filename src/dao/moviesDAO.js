@@ -53,21 +53,25 @@ export default class MoviesDAO {
     Remember that in MongoDB, the $in operator can be used with a list to
     match one or more values of a specific field.
     */
+    const searchCountry = Array.isArray(countries) ? countries : countries.split(", ")
+
+    const query = { countries: { $in: searchCountry } };
+    const projection = { title: 1 };
 
     let cursor
     try {
-      // TODO Ticket: Projection
+      // DONE Ticket: Projection
       // Find movies matching the "countries" list, but only return the title
       // and _id. Do not put a limit in your own implementation, the limit
       // here is only included to avoid sending 46000 documents down the
       // wire.
-      cursor = await movies.find().limit(1)
+      cursor = await movies.find(query, { projection })
     } catch (e) {
       console.error(`Unable to issue find command, ${e}`)
       return []
     }
 
-    return cursor.toArray()
+    return cursor.toArray();
   }
 
   /**
