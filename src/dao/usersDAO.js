@@ -61,7 +61,7 @@ export default class UsersDAO {
       const { name, email, password } = userInfo;
       // TODO Ticket: Durable Writes
       // Use a more durable Write Concern for this operation.
-      await users.insertOne({ name, email, password })
+      await users.insertOne({ name, email, password }, { w: 'majority' })
       return { success: true }
     } catch (e) {
       if (String(e).startsWith("MongoError: E11000 duplicate key error")) {
@@ -86,7 +86,7 @@ export default class UsersDAO {
       await sessions.updateOne(
         { user_id: email },
         { $set: { jwt } },
-        { upsert: true}
+        { upsert: true }
       )
       return { success: true }
     } catch (e) {
