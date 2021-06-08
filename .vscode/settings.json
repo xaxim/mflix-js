@@ -1,3 +1,9 @@
 {
-  "restructuredtext.confPath": ""
+  "restructuredtext.confPath": "",
+  "workbench.colorCustomizations": {
+    "titleBar.activeForeground": "#fff",
+    "titleBar.activeBackground": "#13aa52",
+    "titleBar.inactiveForeground": "#ccccccCC",
+    "titleBar.inactiveBackground": "#13aa52CC"
+  }
 }
